@@ -1,10 +1,12 @@
 import Player from './components/Player';
 import GameBoard from './components/GameBoard';
-import Log from './components/Log';
-import { useState } from 'react';
-import { WINNING_COMBINATIONS } from '../winning-combinations';
 import GameOver from './components/GameOver';
+import Log from './components/Log';
 
+import { WINNING_COMBINATIONS } from '../winning-combinations';
+import { useState } from 'react';
+
+// INITIAL SETUP
 const PLAYERS = {
   X: 'Player 1',
   O: 'Player 2',
@@ -16,6 +18,7 @@ const INITIAL_GAME_BOARD = [
   [null, null, null],
 ];
 
+// HELPER FUNCTIONS
 const deriveActivePlayer = function (gameTurns) {
   let currentPlayer = 'X';
 
@@ -54,6 +57,7 @@ const deriveWinner = function (gameBoard, players) {
   return winner;
 };
 
+// THE MAIN APP
 function App() {
   // setting the States
   const [players, setPlayers] = useState(PLAYERS);
@@ -67,7 +71,7 @@ function App() {
   const winner = deriveWinner(gameBoard, players);
   const hasDraw = gameTurns.length === 9 && !winner;
 
-  // handling actions
+  // handling button clicks
   const handleSelectSquare = function (rowIndex, colIndex) {
     setGameTurns(prevTurns => {
       const currentPlayer = deriveActivePlayer(prevTurns);
